@@ -1,4 +1,4 @@
-package com.example.miguele.superkids;
+package com.example.miguele.superkids.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+<<<<<<< HEAD:app/src/main/java/com/example/miguele/superkids/HomeActivity.java
 import butterknife.Bind;
 import butterknife.ButterKnife;
+=======
+import com.example.miguele.superkids.R;
+
+>>>>>>> 01b11824d1e4134e536b7113d0a4a3a33d8596cb:app/src/main/java/com/example/miguele/superkids/activity/HomeActivity.java
 
 public class HomeActivity extends Activity {
     @Bind(R.id.next_button)
