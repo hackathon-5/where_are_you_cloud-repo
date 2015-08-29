@@ -66,9 +66,15 @@ public class UStats {
     }
 
     public static void toastUsageStats(List<UsageStats> usageStatsList, Context context) {
+
         for (UsageStats u : usageStatsList) {
+            long time = u.getTotalTimeInForeground();
+            int sec  = (int)(time/ 1000) % 60 ;
+            int min  = (int)((time/ (1000*60)) % 60);
+            int hr   = (int)((time/ (1000*60*60)) % 24);
+
             Toast.makeText(context, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
-                    + dateFormat.format(u.getTotalTimeInForeground()), Toast.LENGTH_SHORT).show();
+                    + hr + "h " + min + "m " + sec + "s", Toast.LENGTH_SHORT).show();
         }
     }
 

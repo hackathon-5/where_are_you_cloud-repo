@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SuperKids.iml" filepath="$PROJECT_DIR$/SuperKids.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/where_are_you_cloud-repo.iml" filepath="$PROJECT_DIR$/where_are_you_cloud-repo.iml" />
     </modules>
   </component>
 </project>
