@@ -1,9 +1,11 @@
-package com.example.miguele.superkids;
+package com.example.miguele.superkids.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.miguele.superkids.R;
 
 
 public class HomeActivity extends Activity {
