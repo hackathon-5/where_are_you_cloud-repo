@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.miguele.superkids.R;
 import com.example.miguele.superkids.adapter.CategoryAdapter;
 import com.example.miguele.superkids.model.Category;
+import com.example.miguele.superkids.storage.SuperDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class CategorySelectionActivity extends Activity {
 
     private int totalUsage;
     private int increment;
+    private int accumulator;
+    private boolean changedIncrement = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +147,7 @@ public class CategorySelectionActivity extends Activity {
                 final Dialog categoryDialog = new Dialog(mContext);
                 categoryDialog.setContentView(R.layout.dialog_category);
 
+                accumulator = 0;
                 // Set dialog components
                 ImageView dialogIcon = (ImageView) categoryDialog
                         .findViewById(R.id.dialog_icon);
@@ -172,9 +177,11 @@ public class CategorySelectionActivity extends Activity {
                         if (increment == -1) {
                             increment = 0;
                         }
-
+                        Log.i(TAG, Integer.toString(increment));
+                        changedIncrement = true;
                         String totalTime = Integer.toString(increment * 2) + " mins.";
-                        totalUsage += (increment -1) * 2;
+                        accumulator = increment * 2;
+//                        Log.i(TAG, "tU" + Integer.toString(totalUsage));
                         intervalEdit.setText(totalTime);
                     }
                 });
@@ -183,9 +190,11 @@ public class CategorySelectionActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         increment++;
-
+                        Log.i(TAG, Integer.toString(increment));
+                        changedIncrement = true;
                         String totalTime = Integer.toString(increment * 2) + " mins.";
-                        totalUsage += (increment -1) * 2;
+                        accumulator = increment * 2;
+//                        Log.i(TAG, "tU" + Integer.toString(totalUsage));
                         intervalEdit.setText(totalTime);
                     }
                 });
@@ -204,10 +213,15 @@ public class CategorySelectionActivity extends Activity {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         // Notify of all changes
+                        totalUsage += accumulator;
+                        if (changedIncrement) {
+                            totalUsage = totalUsage -2;
+                        }
                         Toast.makeText(mContext, "Closing dialog", Toast.LENGTH_SHORT).show();
                         categoryAdapter.notifyDataSetChanged();
                         gridView.invalidateViews();
                         totalTimeTxt.setText(Integer.toString(totalUsage) + " mins.");
+                        SuperDB.setTimeUsage(mContext, totalUsage);
 
                     }
                 });

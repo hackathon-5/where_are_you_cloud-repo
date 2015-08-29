@@ -39,6 +39,9 @@ public class RegistrationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.primaryBlue500));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.primaryBlue700));
+
         ButterKnife.bind(this);
         mContext = this;
         setupDB();

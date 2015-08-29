@@ -52,5 +52,6 @@ dependencies {
 
     compile 'com.txusballesteros:bubbles:1.1'
     compile 'com.wunderlist:sliding-layer:1.2.5'
-    
+    compile 'com.pkmmte.view:circularimageview:1.1'
+
 }

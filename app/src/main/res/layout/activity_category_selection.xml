@@ -11,11 +11,13 @@
 
         android:layout_marginTop="36dp"
         android:id="@+id/category_grid_view"
+        android:layout_marginLeft="16dp"
         android:numColumns="3"
         android:gravity="center"
-        android:columnWidth="100dp"
+        android:layout_centerInParent="true"
+        android:columnWidth="60dp"
         android:stretchMode="columnWidth"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="300dp" >
 
     </GridView>
@@ -27,7 +29,7 @@
         android:layout_height="fill_parent">
 
         <TextView
-            android:text="40 min."
+            android:text="12 mins."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50dp"
