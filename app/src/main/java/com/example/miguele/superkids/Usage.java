@@ -9,10 +9,9 @@ import android.widget.Button;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends Activity {
-    @Bind(R.id.next_button)
-    Button nextBtn;
-
+public class Usage extends Activity {
+    @Bind(R.id.usage_button)
+    Button usageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +19,11 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        usageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), Usage.class));
+
+
             }
         });
 
