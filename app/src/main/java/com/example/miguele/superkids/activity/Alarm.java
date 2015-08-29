@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.miguele.superkids.R;
+import com.example.miguele.superkids.storage.SyncInfo;
 import com.txusballesteros.bubbles.BubbleLayout;
 import com.txusballesteros.bubbles.BubblesManager;
 import com.txusballesteros.bubbles.OnInitializedCallback;
@@ -27,16 +28,19 @@ public class Alarm extends BroadcastReceiver {
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
 
-        Toast.makeText(context, "sum: " + UStats.printCurrentUsageStatus(context), Toast.LENGTH_SHORT).show();
+//        SuperDB.getTimeUsage(context);
+        Toast.makeText(context, "sum: " + UStats.printCurrentUsageStatus(context, pm), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "sum: " + Long.toString(SyncInfo.getTotalUsage(context)), Toast.LENGTH_SHORT).show();
 
-        CancelAlarm(context);
+        if (UStats.printCurrentUsageStatus(context, pm) > SyncInfo.getTotalUsage(context)) {
+            CancelAlarm(context);
 
-        wl.release();
+            wl.release();
 
-        Intent myIntent = new Intent(context, BubbleControl.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(myIntent);
-
+            Intent myIntent = new Intent(context, BubbleControl.class);
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(myIntent);
+        }
     }
 
     private void addNewBubble(Context context) {

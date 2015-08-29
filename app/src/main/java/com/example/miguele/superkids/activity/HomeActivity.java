@@ -15,8 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends Activity {
-    @Bind(R.id.next_button)
-    Button nextBtn;
+    @Bind(R.id.next_button) Button nextBtn;
 
 
     @Bind(R.id.parent_btn) Button mParentBtn;
@@ -34,7 +33,7 @@ public class HomeActivity extends Activity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), Usage.class));
+
             }
         });
 

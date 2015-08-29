@@ -3,12 +3,12 @@ package com.example.miguele.superkids.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.miguele.superkids.R;
+import com.example.miguele.superkids.storage.SyncInfo;
 import com.txusballesteros.bubbles.BubbleLayout;
 import com.txusballesteros.bubbles.BubblesManager;
 import com.txusballesteros.bubbles.OnInitializedCallback;
@@ -28,14 +28,15 @@ public class Usage extends Activity {
         setContentView(R.layout.usage_layout);
 
         ButterKnife.bind(this);
-        getUserPermission();
+//        getUserPermission();
         initializeBubblesManager();
 
         usageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //UStats.printCurrentUsageStatus(Usage.this);
-                //addNewBubble();
+//                UStats.printCurrentUsageStatus(Usage.this);
+//                addNewBubble();
+                SyncInfo.setTimeCount(v.getContext(), 0);
                 startService(new Intent(Usage.this, PollService.class));
             }
         });
@@ -77,10 +78,10 @@ public class Usage extends Activity {
         bubblesManager.recycle();
     }
 
-    private void getUserPermission() { //Check if permission enabled for usage stats
-        if (UStats.getUsageStatsList(this).isEmpty()) {
-            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-            startActivity(intent);
-        }
-    }
+//    private void getUserPermission() { //Check if permission enabled for usage stats
+//        if (UStats.getUsageStatsList(this).isEmpty()) {
+//            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+//            startActivity(intent);
+//        }
+//    }
 }

@@ -109,6 +109,9 @@ public class RegistrationActivity extends Activity {
                         // Time to sync...
                         addSecret(secret);
                         // Done thank you! have a view for thank you!
+                        Intent challengerIntent = new Intent(RegistrationActivity.this, Usage.class);
+                        RegistrationActivity.this.startActivity(challengerIntent);
+                        return;
                     } else {
                         Toast.makeText(mContext, "Sorry secret already exist", Toast.LENGTH_SHORT).show();
                         return;
@@ -116,7 +119,7 @@ public class RegistrationActivity extends Activity {
                 }
 
                 // If child and dataSnapshot is nil this fails!
-                if (SyncInfo.getUserType(mContext) == "child") {
+                if ((SyncInfo.getUserType(mContext) == "child")){
                     Toast.makeText(mContext, "Sorry need to set up parent account first", Toast.LENGTH_SHORT).show();
                 } else {
                     addSecret(secret);

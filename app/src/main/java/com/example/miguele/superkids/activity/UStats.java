@@ -4,8 +4,12 @@ import android.app.usage.UsageEvents;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.os.PowerManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.miguele.superkids.storage.SuperDB;
+import com.example.miguele.superkids.storage.SyncInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,16 +47,16 @@ public class UStats {
         Calendar calendar = Calendar.getInstance();
         long endTime = calendar.getTimeInMillis();
         calendar.add(Calendar.YEAR, -1);
-        long startTime = calendar.getTimeInMillis();
+        long startTime = SuperDB.getTimestamp(context);
 
         Log.d(TAG, "Range start:" + dateFormat.format(startTime));
         Log.d(TAG, "Range end:" + dateFormat.format(endTime));
 
-        List<UsageStats> usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime);
+        List<UsageStats> usageStatsList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, startTime + 86400000);
         return usageStatsList;
     }
 
-    public static long getUsageStats(List<UsageStats> usageStatsList) {
+    public static int getUsageStats(List<UsageStats> usageStatsList) {
         long sum = 0;
 
         for (UsageStats u : usageStatsList) {
@@ -66,13 +70,13 @@ public class UStats {
             int min  = (int)((time/ (1000*60)) % 60);
             int hr   = (int)((time/ (1000*60*60)) % 24);
 
-//            Log.d(TAG, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
-//                    + hr + "h " + min + "m " + sec + "s");
+            Log.d(TAG, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
+                    + hr + "h " + min + "m " + sec + "s");
         }
 
         //Log.d(TAG, "sum: " + sum);
 
-        return sum;
+        return (int)((sum/ (100*60)) % 60);
     }
 
 
@@ -92,8 +96,21 @@ public class UStats {
         }
     }
 
-    public static long printCurrentUsageStatus(Context context) {
-        return getUsageStats(getUsageStatsList(context));
+    public static int printCurrentUsageStatus(Context context, PowerManager pm) {
+
+        int counter = 1;
+        boolean isScreenOn = pm.isInteractive();
+        if (isScreenOn) {
+            counter = SyncInfo.getTimeCount(context);
+            counter++;
+            SyncInfo.setTimeCount(context, counter);
+        }
+        int sum = (int)(15000 * counter);
+
+        return (int)((sum/ (100*60)) % 60);
+
+
+//        return getUsageStats(getUsageStatsList(context));
         //toastUsageStats(getUsageStatsList(context), context);
     }
 

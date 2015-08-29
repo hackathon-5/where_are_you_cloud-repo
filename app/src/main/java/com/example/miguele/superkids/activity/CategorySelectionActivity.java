@@ -217,7 +217,7 @@ public class CategorySelectionActivity extends Activity {
                         if (changedIncrement) {
                             totalUsage = totalUsage -2;
                         }
-                        Toast.makeText(mContext, "Closing dialog", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "Closing dialog", Toast.LENGTH_SHORT).show();
                         categoryAdapter.notifyDataSetChanged();
                         gridView.invalidateViews();
                         totalTimeTxt.setText(Integer.toString(totalUsage) + " mins.");
