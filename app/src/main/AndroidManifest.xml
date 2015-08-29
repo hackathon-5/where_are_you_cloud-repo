@@ -42,6 +42,7 @@
 
         <activity
             android:name=".activity.BubbleControl"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_manage" />
 
         <receiver

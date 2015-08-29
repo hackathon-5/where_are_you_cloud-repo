@@ -33,9 +33,10 @@ public class Alarm extends BroadcastReceiver {
 
         wl.release();
 
-        // Bubble stuff
-//        initializeBubblesManager(context);
-//        addNewBubble(context);
+        Intent myIntent = new Intent(context, BubbleControl.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(myIntent);
+
     }
 
     private void addNewBubble(Context context) {
