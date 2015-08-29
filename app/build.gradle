@@ -21,6 +21,7 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 }
 
@@ -38,4 +39,8 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.0.9'
 
     compile 'com.firebase:firebase-client-android:2.3.1+'
+    compile 'com.github.asyl.animation:arcanimator:1.0.0'
+
+    compile 'io.realm:realm-android:0.82.1'
+    compile 'com.google.code.gson:gson:2.3'
 }

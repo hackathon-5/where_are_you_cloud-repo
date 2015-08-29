@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/category_item_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/primaryColor"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_done" >
+    </ImageView>
+
+    <!--<com.melnykov.fab.FloatingActionButton-->
+        <!--android:id="@+id/category_item_iv"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:clickable="false"-->
+        <!--android:focusable="false"-->
+        <!--android:src="@drawable/ic_done"-->
+        <!--fab:fab_colorNormal="@color/accentPinkA400"-->
+        <!--fab:fab_colorPressed="@color/accentPinkA700" />-->
+
+
+</RelativeLayout>

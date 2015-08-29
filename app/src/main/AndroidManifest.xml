@@ -30,8 +30,8 @@
             android:name=".activity.Usage"
             android:label="Usage" />
         <activity
-            android:name=".activity.ManageActivity"
-            android:label="@string/title_activity_manage" >
+            android:name=".activity.CategorySelectionActivity"
+            android:label="@string/title_activity_category_selection" >
         </activity>
     </application>
 

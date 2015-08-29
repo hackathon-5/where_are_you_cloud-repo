@@ -2,6 +2,7 @@ package com.example.miguele.superkids.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -104,6 +105,7 @@ public class RegistrationActivity extends Activity {
                     if (SyncInfo.getUserType(mContext) == "child") {
                         // Time to sync...
                         addSecret(secret);
+                        // Done thank you! have a view for thank you!
                     } else {
                         Toast.makeText(mContext, "Sorry secret already exist", Toast.LENGTH_SHORT).show();
                         return;
@@ -115,6 +117,9 @@ public class RegistrationActivity extends Activity {
                     Toast.makeText(mContext, "Sorry need to set up parent account first", Toast.LENGTH_SHORT).show();
                 } else {
                     addSecret(secret);
+                    // Onto ControllerSelection
+                    Intent challengerIntent = new Intent(RegistrationActivity.this, CategorySelectionActivity.class);
+                    RegistrationActivity.this.startActivity(challengerIntent);
                 }
 
             }
@@ -141,6 +146,7 @@ public class RegistrationActivity extends Activity {
 
         // Add value based on userType
         secretRef.child(userType).setValue(value);
+        return;
     }
 
 
