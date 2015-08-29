@@ -2,40 +2,41 @@ package com.example.miguele.superkids.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.miguele.superkids.R;
-import com.example.miguele.superkids.storage.SyncInfo;
+import com.melnykov.fab.FloatingActionButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+public class RegistrationActivity extends Activity {
 
-public class HomeActivity extends Activity {
-
-    @Bind(R.id.parent_btn) Button mParentBtn;
-    @Bind(R.id.child_btn) Button mChildBtn;
+//    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.secret_edit_txt) EditText secretEditTxt;
+    @Bind(R.id.registration_fab) FloatingActionButton mRegistrationFab;
 
     Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        mContext = this;
+        setContentView(R.layout.activity_registration);
         ButterKnife.bind(this);
+        mContext = this;
+        setupUI();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_registration, menu);
         return true;
     }
 
@@ -54,18 +55,35 @@ public class HomeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.parent_btn)
-    public void parentPress(View v) {
-        SyncInfo.setUserType(mContext, "parent");
-        Intent challengerIntent = new Intent(HomeActivity.this, RegistrationActivity.class);
-        HomeActivity.this.startActivity(challengerIntent);
+    private void setupUI() {
+        //initializeToolbar();
     }
 
-    @OnClick(R.id.child_btn)
-    public void childPress(View v) {
-        SyncInfo.setUserType(mContext, "child");
-        Intent challengerIntent = new Intent(HomeActivity.this, RegistrationActivity.class);
-        HomeActivity.this.startActivity(challengerIntent);
+//    private void initializeToolbar() {
+//        if (mToolbar != null) {
+//            mToolbar.setTitle("Register");
+//            mToolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
+//
+//            setActionBar(mToolbar);
+//        }
+//    }
+
+    @OnClick(R.id.registration_fab)
+    public void registrationSubmit(View v) {
+        Toast.makeText(mContext, "Hello there", Toast.LENGTH_SHORT).show();
+
+        // Verify secret is valid
+
+        // Add secret to database
     }
+
+    private void verifySecret(String secret) {
+
+    }
+
+    private void addSecret(String secret) {
+
+    }
+
 
 }
