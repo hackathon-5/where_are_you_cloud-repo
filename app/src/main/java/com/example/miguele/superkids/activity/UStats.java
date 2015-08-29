@@ -52,7 +52,34 @@ public class UStats {
         return usageStatsList;
     }
 
-    public static void printUsageStats(List<UsageStats> usageStatsList) {
+    public static long getUsageStats(List<UsageStats> usageStatsList) {
+        long sum = 0;
+
+        for (UsageStats u : usageStatsList) {
+            long time = u.getTotalTimeInForeground();
+
+            if (!u.getPackageName().contains("com.android")) {
+                sum += time;
+            }
+
+            int sec  = (int)(time/ 1000) % 60 ;
+            int min  = (int)((time/ (1000*60)) % 60);
+            int hr   = (int)((time/ (1000*60*60)) % 24);
+
+//            Log.d(TAG, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
+//                    + hr + "h " + min + "m " + sec + "s");
+        }
+
+        //Log.d(TAG, "sum: " + sum);
+
+        return sum;
+    }
+
+
+    // set up polling usage against set time value
+    // get time value when it is adjusted by the parent
+
+    public static void toastUsageStats(List<UsageStats> usageStatsList, Context context) {
 
         for (UsageStats u : usageStatsList) {
             long time = u.getTotalTimeInForeground();
@@ -60,21 +87,14 @@ public class UStats {
             int min  = (int)((time/ (1000*60)) % 60);
             int hr   = (int)((time/ (1000*60*60)) % 24);
 
-            Log.d(TAG, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
-                    + hr + "h " + min + "m " + sec + "s");
-        }
-    }
-
-    public static void toastUsageStats(List<UsageStats> usageStatsList, Context context) {
-        for (UsageStats u : usageStatsList) {
             Toast.makeText(context, "Pkg: " + u.getPackageName() + "\t" + "ForegroundTime: "
-                    + dateFormat.format(u.getTotalTimeInForeground()), Toast.LENGTH_SHORT).show();
+                    + hr + "h " + min + "m " + sec + "s", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void printCurrentUsageStatus(Context context) {
-        printUsageStats(getUsageStatsList(context));
-        toastUsageStats(getUsageStatsList(context), context);
+    public static long printCurrentUsageStatus(Context context) {
+        return getUsageStats(getUsageStatsList(context));
+        //toastUsageStats(getUsageStatsList(context), context);
     }
 
     @SuppressWarnings("ResourceType")

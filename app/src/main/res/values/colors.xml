@@ -16,6 +16,7 @@
     <color name="primaryGrey900">#212121</color>
 
     <color name="green">#00FF00</color>
+    <color name="clear">#00000000</color>
 
     <!-- Accent: Pink -->
     <color name="accentPinkA100">#FF80AB</color>

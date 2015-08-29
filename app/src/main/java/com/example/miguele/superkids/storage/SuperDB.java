@@ -13,13 +13,14 @@ import com.firebase.client.ValueEventListener;
  */
 public class SuperDB {
 
-    private SuperDB() {}
+    private SuperDB() {
+    }
 
     public static void addGroup(Context context) {
 
     }
 
-    public static int getTimeUsage(final Context context) {
+public static int getTimeUsage(final Context context) {
         String secret = SyncInfo.getSecret(context);
         Firebase.setAndroidContext(context);
         Firebase kidsFirebase = new Firebase("https://superkids.firebaseio.com/");
@@ -40,10 +41,6 @@ public class SuperDB {
 
             }
         });
-
-
-
-
         return 0;
 
     }

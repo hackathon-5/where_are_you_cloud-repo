@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.miguele.superkids" >
+    package="com.example.miguele.superkids">
 
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.NoActionBar">
         <activity
             android:name=".activity.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +26,33 @@
         </activity>
         <activity
             android:name=".activity.RegistrationActivity"
-            android:label="@string/title_activity_registration" >
-        </activity>
+            android:label="@string/title_activity_registration" />
         <activity
             android:name=".activity.Usage"
             android:label="Usage" />
+
+        <service
+            android:name="com.txusballesteros.bubbles.BubblesService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".activity.CategorySelectionActivity"
             android:label="@string/title_activity_category_selection" >
         </activity>
+        <activity
+            android:name=".activity.ManageActivity"
+            android:label="@string/title_activity_manage" />
+
+        <activity
+            android:name=".activity.BubbleControl"
+            android:label="@string/title_activity_manage" />
+
+        <receiver
+            android:name=".activity.Alarm"
+            android:process=":remote" />
+
+        <service android:name=".activity.PollService"/>
     </application>
 
 </manifest>
