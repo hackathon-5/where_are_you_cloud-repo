@@ -3,6 +3,7 @@ package com.example.miguele.superkids.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.miguele.superkids.R;
+import com.example.miguele.superkids.storage.SyncInfo;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.melnykov.fab.FloatingActionButton;
 
 import butterknife.Bind;
@@ -18,11 +24,15 @@ import butterknife.OnClick;
 
 public class RegistrationActivity extends Activity {
 
+    private static final String TAG = "activity_registration";
+
 //    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.secret_edit_txt) EditText secretEditTxt;
+    @Bind(R.id.secret_edit_txt) EditText mSecretEditTxt;
     @Bind(R.id.registration_fab) FloatingActionButton mRegistrationFab;
 
+    private Firebase kidsFirebase = null;
     Context mContext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,7 @@ public class RegistrationActivity extends Activity {
         setContentView(R.layout.activity_registration);
         ButterKnife.bind(this);
         mContext = this;
+        setupDB();
         setupUI();
     }
 
@@ -68,21 +79,68 @@ public class RegistrationActivity extends Activity {
 //        }
 //    }
 
+    private void setupDB() {
+        Firebase.setAndroidContext(mContext);
+        kidsFirebase = new Firebase("https://superkids.firebaseio.com/");
+    }
+
     @OnClick(R.id.registration_fab)
     public void registrationSubmit(View v) {
-        Toast.makeText(mContext, "Hello there", Toast.LENGTH_SHORT).show();
+        String secret = mSecretEditTxt.getText().toString();
 
         // Verify secret is valid
-
+        verifySecret(secret);
         // Add secret to database
     }
 
-    private void verifySecret(String secret) {
+    private void verifySecret(final String secret) {
+        Firebase secretRef = kidsFirebase.child("data").child(secret);
+
+        secretRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+
+                    if (SyncInfo.getUserType(mContext) == "child") {
+                        // Time to sync...
+                        addSecret(secret);
+                    } else {
+                        Toast.makeText(mContext, "Sorry secret already exist", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                // If child and dataSnapshot is nil this fails!
+                if (SyncInfo.getUserType(mContext) == "child") {
+                    Toast.makeText(mContext, "Sorry need to set up parent account first", Toast.LENGTH_SHORT).show();
+                } else {
+                    addSecret(secret);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
     }
 
+    // Parent add secret
     private void addSecret(String secret) {
+        Log.i(TAG, "adding secret");
 
+        Firebase secretRef = kidsFirebase.child("data").child(secret);
+
+        // Save secret
+        SyncInfo.setSecret(mContext, secret);
+
+        String userType = SyncInfo.getUserType(mContext);
+        String value = userType + "-" + secret;
+
+        // Add value based on userType
+        secretRef.child(userType).setValue(value);
     }
 
 
