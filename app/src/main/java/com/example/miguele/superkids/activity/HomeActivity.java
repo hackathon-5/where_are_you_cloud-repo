@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,9 +13,6 @@ import com.example.miguele.superkids.storage.SyncInfo;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class HomeActivity extends Activity {
     @Bind(R.id.next_button)
@@ -35,7 +30,6 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         mContext = this;
         ButterKnife.bind(this);
-    }
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,4 +55,4 @@ public class HomeActivity extends Activity {
     }
 
 }
-}
+

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<<<<<<< HEAD
     <color name="primaryColor">#5677FC</color>
     <color name="secondaryColor">#9C27B0</color>
 
@@ -15,7 +14,8 @@
     <color name="primaryGrey300">#E0E0E0</color>
     <color name="primaryGrey400">#99BDBDBD</color>
     <color name="primaryGrey900">#212121</color>
-<color name="green">#00FF00</color>
+
+    <color name="green">#00FF00</color>
 
     <!-- Accent: Pink -->
     <color name="accentPinkA100">#FF80AB</color>

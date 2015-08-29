@@ -25,6 +25,7 @@
             android:name=".activity.RegistrationActivity"
             android:label="@string/title_activity_registration" >
         </activity>
+        <activity
             android:name=".activity.Usage"
             android:label="Usage"></activity>
     </application>

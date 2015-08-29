@@ -38,6 +38,7 @@ gen-external-apklibs
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, `App`Code, PyCharm, CLion, Android Studio
 
+app/app.iml
 *.iml
 
 ## Directory-based project format:
