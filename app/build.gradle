@@ -23,6 +23,12 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
 }
 
 dependencies {
@@ -46,4 +52,5 @@ dependencies {
 
     compile 'com.txusballesteros:bubbles:1.1'
     compile 'com.wunderlist:sliding-layer:1.2.5'
+    
 }
