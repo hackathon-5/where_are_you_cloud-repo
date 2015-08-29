@@ -26,6 +26,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+<<<<<<< HEAD
 
     compile 'com.jakewharton:butterknife:7.0.1'
 
@@ -38,4 +39,7 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.0.9'
 
     compile 'com.firebase:firebase-client-android:2.3.1+'
+=======
+    compile 'com.jakewharton:butterknife:7.0.1'
+>>>>>>> cf016029dc447cfd6f85c8ba7e2e29295b908cf6
 }
